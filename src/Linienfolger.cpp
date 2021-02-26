@@ -1,104 +1,84 @@
 #include <Arduino.h>
 
 //Left Motor
-int LR_IS = pin;
-int LR_EN = pin;
-int LR_PWM = pin;
-int LL_IS = pin;
-int LL_EN = pin;
-int LL_PWM = pin;
+#define LEFT_ENABLE_PIN 12
+#define LEFT_PWM_PIN_FORWARD 11
+#define LEFT_PWM_PIN_BACKWARD 10
+
 
 //Right Motor
-int RR_IS = pin;
-int RR_EN = pin;
-int RR_PWM = pin;
-int RL_IS = pin;
-int RL_EN = pin;
-int RL_PWM = pin;
+#define RIGHT_ENABLE_PIN 7
+#define RIGHT_PWM_PIN_FORWARD 6
+#define RIGHT_PWM_PIN_BACKWARD 5
+
+//Trigger
+#define US_TRIGGER 13
 
 //Ultrasonic Sensor Left
-const int trigPinL = pin;
-const int echoPinL = pin;
+#define US_FRONT_ECHO 4
+long durationF;
+int distanceF;
+
+//Ultrasonic Sensor Left
+#define US_LEFT_ECHO 3
 long durationL;
 int distanceL;
 
-//Ultrasonic Sensor Front Left
-const int trigPinFL = pin;
-const int echoPinFL = pin;
-long durationFL;
-int distanceFL;
-
-//Ultrasonic Sensor Front Right
-const int trigPinFR = pin;
-const int echoPinFR = pin;
-long durationFR;
-int distanceFR;
-
 //Ultrasonic Sensor Right
-const int trigPinR = pin;
-const int echoPinR = pin;
+#define US_RIGHT_ECHO 2
 long durationR;
 int distanceR;
+
+//IR-Sensors
+int ir_sensor_array[8] = {A0, A1, A2, A3, A4, A5, 8, 9};
+
 
 //function for checking for objects on the front
 int checkDistanceFront(){
   //make sure that the trigpins are disabled
-  digitalWrite(trigPinFL, LOW);
-  digitalWrite(trigPinFR, LOW);
+  digitalWrite(US_FRONT_ECHO, LOW);
   delayMicroseconds(2);
 
-  //frontLeft check
-  
+
   //send ultrasonic signal
-  digitalWrite(trigPinFL, HIGH);
+  digitalWrite(US_TRIGGER, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPinFL; LOW);
+  digitalWrite(US_TRIGGER, LOW);
 
   //messure duration and  calculate distance
-  durationFL = pulseIn(echoPinFL, HIGH);
-  distanceFL = durationFR*0.034/2; //distance in cm
+  durationF = pulseIn(US_FRONT_ECHO, HIGH);
+  distanceF = durationF*0.034/2; //distance in cm
 
 
-  //frontRight check
-  
-  //send ultrasonic signal
-  digitalWrite(trigPinFR, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPinFR, LOW);
-
-  //messure duration and calculate distance
-  durationFR = pulseIn(echoPinFR, HIGH);
-  distanceFR = durationFR*0.034/2; //distance in cm
 }
 
 //function for checking for objects on the sides
 int checkDistanceSides(){
   //make sure that the trigpins are disabled
-  digitalWrite(trigPinR, LOW);
-  digitalWrite(trigPinL, LOW);
+  digitalWrite(US_TRIGGER, LOW);
   delayMicroseconds(2);
 
   //Left check
   
   //send ultrasonic signal
-  digitalWrite(trigPinL, HIGH);
+  digitalWrite(US_TRIGGER, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPinL; LOW);
+  digitalWrite(US_TRIGGER, LOW);
 
   //messure duration and calculate distance
-  durationL = pulseIn(echoPinL, HIGH);
+  durationL = pulseIn(US_LEFT_ECHO, HIGH);
   distanceL = durationL*0.034/2; //distance in cm
 
 
   //Right check
   
   //send ultrasonic signal
-  digitalWrite(trigPinR, HIGH);
+  digitalWrite(US_TRIGGER, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPinR, LOW);
+  digitalWrite(US_TRIGGER, LOW);
 
   //messure duration and calculate distance
-  durationR = pulseIn(echoPinR, HIGH);
+  durationR = pulseIn(US_RIGHT_ECHO, HIGH);
   distanceR = durationR*0.034/2; //distance in cm
 }
 
@@ -106,38 +86,18 @@ void setup() {
   Serial.begin(9600);
   
   //LeftMotor
-  pinMode(LR_IS, OUTPUT);
-  pinMode(LR_PWM, OUTPUT);
-  pinMode(LR_EN, OUTPUT);
-  pinMode(LL_IS, OUTPUT);
-  pinMode(LL_PWM, OUTPUT);
-  pinMode(LL_EN, OUTPUT);
-  digitalWrite(LR_IS, LOW);
-  digitalWrite(LL_IS, LOW);
-  digitalWrite(LR_EN, HIGH);
-  digitalWrite(LL_EN, HIGH);
+  pinMode(LEFT_PWM_PIN_FORWARD, OUTPUT);
+  pinMode(LEFT_PWM_PIN_BACKWARD, OUTPUT);
+  pinMode(LEFT_ENABLE_PIN, OUTPUT);
+  digitalWrite(LEFT_ENABLE_PIN, HIGH);
 
   //RightMotor
-  pinMode(RR_IS, OUTPUT);
-  pinMode(RR_PWM, OUTPUT);
-  pinMode(RR_EN, OUTPUT);
-  pinMode(RL_IS, OUTPUT);
-  pinMode(RL_PWM, OUTPUT);
-  pinMode(RL_EN, OUTPUT);
-  digitalWrite(RR_IS, LOW);
-  digitalWrite(RL_IS, LOW);
-  digitalWrite(RR_EN, HIGH);
-  digitalWrite(RL_EN, HIGH);
+  pinMode(RIGHT_ENABLE_PIN, OUTPUT);
+  pinMode(RIGHT_PWM_PIN_FORWARD, OUTPUT);
+  pinMode(RIGHT_PWM_PIN_BACKWARD, OUTPUT);
+  digitalWrite(RIGHT_ENABLE_PIN, HIGH);
 
-  //IR-Sensors
-  int sensor1 = digitalRead(pin);
-  int sensor2 = digitalRead(pin);
-  int sensor3 = digitalRead(pin);
-  int sensor4 = digitalRead(pin);
-  int sensor5 = digitalRead(pin);
-  int sensor6 = digitalRead(pin);
-  int sensor7 = digitalRead(pin);
-  int sensor8 = digitalRead(pin);
+ 
 
 }
 
