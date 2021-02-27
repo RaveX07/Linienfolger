@@ -57,7 +57,7 @@ int checkDistanceFront(){
 int checkDistanceSides(){
   //make sure that the trigpins are disabled
   digitalWrite(US_TRIGGER, LOW);
-  delayMicroseconds(2);
+  delayMicroseconds(3);
 
   //Left check
   
