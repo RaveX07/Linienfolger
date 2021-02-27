@@ -37,7 +37,7 @@ int ir_sensor_array[8] = {A0, A1, A2, A3, A4, A5, 8, 9};
 int checkDistanceFront(){
   //make sure that the trigpins are disabled
   digitalWrite(US_FRONT_ECHO, LOW);
-  delayMicroseconds(2);
+  delayMicroseconds(3);
 
 
   //send ultrasonic signal
