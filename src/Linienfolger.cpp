@@ -5,6 +5,7 @@
 #define LEFT_PWM_PIN_FORWARD 11
 #define LEFT_PWM_PIN_BACKWARD 10
 
+//PWM: 11, 10, 9, 6, 5, 3
 
 //Right Motor
 #define RIGHT_ENABLE_PIN 7
@@ -82,24 +83,13 @@ int checkDistanceSides(){
   distanceR = durationR*0.034/2; //distance in cm
 }
 
-void setup() {
-  Serial.begin(9600);
-  
-  //LeftMotor
-  pinMode(LEFT_PWM_PIN_FORWARD, OUTPUT);
-  pinMode(LEFT_PWM_PIN_BACKWARD, OUTPUT);
-  pinMode(LEFT_ENABLE_PIN, OUTPUT);
-  digitalWrite(LEFT_ENABLE_PIN, HIGH);
-
-  //RightMotor
-  pinMode(RIGHT_ENABLE_PIN, OUTPUT);
-  pinMode(RIGHT_PWM_PIN_FORWARD, OUTPUT);
-  pinMode(RIGHT_PWM_PIN_BACKWARD, OUTPUT);
-  digitalWrite(RIGHT_ENABLE_PIN, HIGH);
-
- 
+void loop() {
+  // put your main code here, to run repeatedly:
 
 }
+ 
+
+
 
 void loop() {
   // put your main code here, to run repeatedly:
