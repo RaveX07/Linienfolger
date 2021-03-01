@@ -19,8 +19,9 @@
 #define US_FRONT_ECHO 4
 long durationF;
 int distanceF;
+int UltrasonicLeft = 2;
 
-//Ultrasonic Sensor Left
+//Ultrasonic Sensor Left/Middle?
 #define US_LEFT_ECHO 3
 long durationL;
 int distanceL;
@@ -29,6 +30,7 @@ int distanceL;
 #define US_RIGHT_ECHO 2
 long durationR;
 int distanceR;
+int  UltrasonicRight = 9;
 
 //IR-Sensors
 int ir_sensor_array[8] = {A0, A1, A2, A3, A4, A5, 8, 9};
@@ -88,10 +90,3 @@ void loop() {
 
 }
  
-
-
-
-void loop() {
-  // put your main code here, to run repeatedly:
-
-}
