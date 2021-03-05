@@ -1,6 +1,6 @@
 //Meine Sensor Bennenung: [Left][HalfLeft][LeftFromMiddle][MiddleLeft][MiddleRight][RightFromMiddle][HalfRight][Right]
 //ich gehe davon aus dass der normale Speed beim geradeausfahren 200 ist
-if ((LeftFromMiddle =0) & (RightFromMiddle =))
+if ((LeftFromMiddle =0) & (RightFromMiddle =1))
 {
     analogWrite(LeftMotor, 200);
     analogWrite(RightMotor, 190)
