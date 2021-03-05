@@ -30,7 +30,7 @@ int distanceL;
 #define US_RIGHT_ECHO 2
 long durationR;
 int distanceR;
-int  UltrasonicRight = 9;
+int UltrasonicRight = 9;
 
 //IR-Sensors
 int ir_sensor_array[8] = {A0, A1, A2, A3, A4, A5, 8, 9};
