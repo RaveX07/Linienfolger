@@ -95,32 +95,32 @@ int checkDistanceSides(){
 
 int drive ()
 {
-  if ((LeftFromMiddle =0) & (RightFromMiddle =1))
+  if ((ir_sensor_LeftFromMiddle =0) & (ir_sensor_RightFromMiddle =1))
 {
     analogWrite(LEFT_PWM_PIN_FORWARD, 200);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 190);
 };
-  if ((LeftFromMiddle =1) & (RightFromMiddle =0))
+  if ((ir_sensor_LeftFromMiddle =1) & (ir_sensor_RightFromMiddle =0))
 {
     analogWrite(LEFT_PWM_PIN_FORWARD, 190);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
 };
-  if ((HalfLeft =0) & (HalfRight =1))
+  if ((ir_sensor_HalfLeft =0) & (ir_sensor_HalfRight =1))
 {
     analogWrite(LEFT_PWM_PIN_FORWARD, 200);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 180);
 };
-  if ((HalfLeft =1) & (HalfRight =0))
+  if ((ir_sensor_HalfLeft =1) & (ir_sensor_HalfRight =0))
 {
     analogWrite(LEFT_PWM_PIN_FORWARD, 180);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 200)
 };
-  if ((Left =0) & (Right =1))
+  if ((ir_sensor_Left =0) & (ir_sensor_Right =1))
 {
     analogWrite(LEFT_PWM_PIN_FORWARD, 200);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 170)
 };
-  if ((Left =1) & (Right =0))
+  if ((ir_sensor_Left =1) & (ir_sensor_Right =0))
 {
     analogWrite(LEFT_PWM_PIN_FORWARD, 170);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 200)
