@@ -4,7 +4,6 @@ if ((LeftFromMiddle =0) & (RightFromMiddle =))
 {
     analogWrite(LeftMotor, 200);
     analogWrite(RightMotor, 190)
-    //So wurde das in dem Tutorial gemacht... Wir haben dafür die Library nicht installiert und ich kenn den korrekten Command und Motornamen nicht also ja...
 };
 if ((LeftFromMiddle =1) & (RightFromMiddle =0))
 {
