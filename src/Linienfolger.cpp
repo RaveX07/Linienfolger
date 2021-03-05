@@ -113,17 +113,17 @@ int drive ()
   if ((ir_sensor_HalfLeft =1) & (ir_sensor_HalfRight =0))
 {
     analogWrite(LEFT_PWM_PIN_FORWARD, 180);
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 200)
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
 };
   if ((ir_sensor_Left =0) & (ir_sensor_Right =1))
 {
     analogWrite(LEFT_PWM_PIN_FORWARD, 200);
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 170)
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 170);
 };
   if ((ir_sensor_Left =1) & (ir_sensor_Right =0))
 {
     analogWrite(LEFT_PWM_PIN_FORWARD, 170);
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 200)
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
 };
 }
 
