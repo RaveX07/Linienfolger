@@ -33,14 +33,14 @@ int distanceR;
 int  UltrasonicRight = 9;
 
 //IR-Sensors
-#define ir_sensor_Left = A0
-#define ir_sensor_HalfLeft = A1
-#define ir_sensor_LeftFromMiddle = A2
-#define ir_sensor_MiddleLeft = A3
-#define ir_sensor_MiddleRight = A4
-#define ir_sensor_RightFromMiddle = A5
-#define ir_sensor_HalfRight = 8
-#define ir_sensor_Right = 9
+#define ir_sensor_Left A0
+#define ir_sensor_HalfLeft A1
+#define ir_sensor_LeftFromMiddle A2
+#define ir_sensor_MiddleLeft A3
+#define ir_sensor_MiddleRight A4
+#define ir_sensor_RightFromMiddle A5
+#define ir_sensor_HalfRight 8
+#define ir_sensor_Right 9
 //int ir_sensor_array[8] = {A0, A1, A2, A3, A4, A5, 8, 9};
 
 
