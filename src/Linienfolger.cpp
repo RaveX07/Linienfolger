@@ -30,7 +30,7 @@ int distanceL;
 #define US_RIGHT_ECHO 2
 long durationR;
 int distanceR;
-int  UltrasonicRight = 9;
+int UltrasonicRight = 9;
 
 //IR-Sensors
 int ir_sensor_Left = A0;
@@ -43,13 +43,12 @@ int ir_sensor_HalfRight = 8;
 int ir_sensor_Right = 9;
 //int ir_sensor_array[8] = {A0, A1, A2, A3, A4, A5, 8, 9};
 
-
 //function for checking for objects on the front
-int checkDistanceFront(){
+int checkDistanceFront()
+{
   //make sure that the trigpins are disabled
   digitalWrite(US_FRONT_ECHO, LOW);
   delayMicroseconds(2);
-
 
   //send ultrasonic signal
   digitalWrite(US_TRIGGER, HIGH);
@@ -58,19 +57,18 @@ int checkDistanceFront(){
 
   //messure duration and  calculate distance
   durationF = pulseIn(US_FRONT_ECHO, HIGH);
-  distanceF = durationF*0.034/2; //distance in cm
-
-
+  distanceF = durationF * 0.034 / 2; //distance in cm
 }
 
 //function for checking for objects on the sides
-int checkDistanceSides(){
+int checkDistanceSides()
+{
   //make sure that the trigpins are disabled
   digitalWrite(US_TRIGGER, LOW);
   delayMicroseconds(2);
 
   //Left check
-  
+
   //send ultrasonic signal
   digitalWrite(US_TRIGGER, HIGH);
   delayMicroseconds(10);
@@ -78,11 +76,10 @@ int checkDistanceSides(){
 
   //messure duration and calculate distance
   durationL = pulseIn(US_LEFT_ECHO, HIGH);
-  distanceL = durationL*0.034/2; //distance in cm
-
+  distanceL = durationL * 0.034 / 2; //distance in cm
 
   //Right check
-  
+
   //send ultrasonic signal
   digitalWrite(US_TRIGGER, HIGH);
   delayMicroseconds(10);
@@ -90,10 +87,11 @@ int checkDistanceSides(){
 
   //messure duration and calculate distance
   durationR = pulseIn(US_RIGHT_ECHO, HIGH);
-  distanceR = durationR*0.034/2; //distance in cm
+  distanceR = durationR * 0.034 / 2; //distance in cm
 }
 
-int drive ()
+
+int drive()
 {
   ir_sensor_Left = digitalRead(A0);
   ir_sensor_HalfLeft = digitalRead(A1);
@@ -104,42 +102,64 @@ int drive ()
   ir_sensor_HalfRight = digitalRead(8);
   ir_sensor_Right = digitalRead(9);
 
-  if ((ir_sensor_LeftFromMiddle =0) & (ir_sensor_RightFromMiddle =1)) {
+  if (ir_sensor_RightFromMiddle == 1)
+  {
     analogWrite(LEFT_PWM_PIN_FORWARD, 200);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 190);
-  } else if ((ir_sensor_LeftFromMiddle =1) & (ir_sensor_RightFromMiddle =0)) {
+  }
+  else if (ir_sensor_LeftFromMiddle == 1)
+  {
     analogWrite(LEFT_PWM_PIN_FORWARD, 190);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
-  } else if ((ir_sensor_HalfLeft =0) & (ir_sensor_HalfRight =1)) { 
+  }
+  else if (ir_sensor_HalfRight == 1)
+  {
     analogWrite(LEFT_PWM_PIN_FORWARD, 200);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 180);
-  } else if ((ir_sensor_HalfLeft =1) & (ir_sensor_HalfRight =0)) {
+  }
+  else if (ir_sensor_HalfLeft == 1)
+  {
     analogWrite(LEFT_PWM_PIN_FORWARD, 180);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
-  } else if ((ir_sensor_Left =0) & (ir_sensor_Right =1)) { 
+  }
+  else if (ir_sensor_Right == 1)
+  {
     analogWrite(LEFT_PWM_PIN_FORWARD, 200);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 170);
-  } else if ((ir_sensor_Left =1) & (ir_sensor_Right =0)) {
+  }
+  else if (ir_sensor_Left == 1)
+  {
     analogWrite(LEFT_PWM_PIN_FORWARD, 170);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
-  };
+  }
+  else if ((ir_sensor_MiddleLeft == 1) && (ir_sensor_MiddleRight == 0))
+  {
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
+    analogWrite(LEFT_PWM_PIN_FORWARD, 195);
+  }
+  else if ((ir_sensor_MiddleLeft == 0) && (ir_sensor_MiddleRight == 1))
+  {
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 195);
+    analogWrite(LEFT_PWM_PIN_FORWARD, 200);
+  }
 }
 
-void setup() {
-  Serial.begin(9600);
+  void setup()
+  {
+    Serial.begin(9600);
 
-  pinMode(LEFT_PWM_PIN_BACKWARD, OUTPUT);
-  pinMode(LEFT_PWM_PIN_FORWARD, OUTPUT);
-  pinMode(LEFT_ENABLE_PIN, OUTPUT);
-  pinMode(RIGHT_ENABLE_PIN, OUTPUT);
-  pinMode(RIGHT_PWM_PIN_BACKWARD, OUTPUT);
-  pinMode(RIGHT_PWM_PIN_FORWARD, OUTPUT);
-  
-  digitalWrite(LEFT_ENABLE_PIN, HIGH);
-  digitalWrite(RIGHT_ENABLE_PIN, HIGH);
+    pinMode(LEFT_PWM_PIN_BACKWARD, OUTPUT);
+    pinMode(LEFT_PWM_PIN_FORWARD, OUTPUT);
+    pinMode(LEFT_ENABLE_PIN, OUTPUT);
+    pinMode(RIGHT_ENABLE_PIN, OUTPUT);
+    pinMode(RIGHT_PWM_PIN_BACKWARD, OUTPUT);
+    pinMode(RIGHT_PWM_PIN_FORWARD, OUTPUT);
 
-}
- 
- void loop(){
+    digitalWrite(LEFT_ENABLE_PIN, HIGH);
+    digitalWrite(RIGHT_ENABLE_PIN, HIGH);
+  }
 
- }
+  void loop()
+  {
+    drive();
+  }
