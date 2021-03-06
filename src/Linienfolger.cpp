@@ -105,11 +105,11 @@ while (distanceF < 3)
 //Roboter dreht sich um sich selbst, bis das Hindernis neben ihm ist
   while ((distanceL > 3) && (distanceR > 3))
   {
+    digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
+    digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
     checkDistanceRight ();
     checkDistanceLeft ();
     checkDistanceFront ();
-    digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
-    digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
   };
 //das Hindenis ist nun rechts neben ihm
   if (distanceR < 3)
@@ -120,12 +120,11 @@ while (distanceF < 3)
 //Er fähr solange gerade aus, bis das Hindernis nicht mehr neben ihm ist
     while (distanceR < 3)
     {
+      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
       checkDistanceRight ();
       checkDistanceLeft ();
       checkDistanceFront ();
-
-      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
-      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
     };
   }
   //nun ist er am Hinderniss seitlich vorbeigefahren
@@ -137,12 +136,11 @@ while (distanceF < 3)
 //nun fährt er eine Kurve nach rechts, bis er auf das Hindernis trifft
     while ((distanceL > 3) && (distanceR > 3) && (distanceF > 3))
     {
+      digitalWrite (LEFT_PWM_PIN_FORWARD, 50);
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
       checkDistanceRight ();
       checkDistanceLeft ();
       checkDistanceFront ();
-
-      digitalWrite (LEFT_PWM_PIN_FORWARD, 50);
-      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
     };
   }
 
@@ -158,12 +156,11 @@ while (distanceF < 3)
 //er dreht sich um die eigene Achse, bis das Hindernis neben ihm ist
     while ((distanceL > 3) && (distanceR > 3))
     {
+      digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
       checkDistanceRight ();
       checkDistanceLeft ();
       checkDistanceFront ();
-
-      digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
-      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
     }
     
   }
@@ -179,12 +176,11 @@ while (distanceF < 3)
 //er fährt am Hindernis entlang, bis es nicht mehr rechts von ihm ist
     while (distanceR < 3)
     {
+      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
       checkDistanceRight ();
       checkDistanceLeft ();
       checkDistanceFront ();
-
-      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
-      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
     }
   }
   checkDistanceRight ();
@@ -199,11 +195,11 @@ while (distanceF < 3)
       //er dreht sich um die eigene Achse, bis er das Hindernis wieder mit einem Sensor erkennt
       while ((distanceL > 3) && (distanceR > 3) && (distanceF > 3))
       {
+        digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
+        digitalWrite (RIGHT_PWM_PIN_FORWARD, 0);
         checkDistanceRight ();
         checkDistanceLeft ();
         checkDistanceFront ();
-        digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
-        digitalWrite (RIGHT_PWM_PIN_FORWARD, 0);
       }
   }
   //das Hindernis befindet sich vor ihm
@@ -212,8 +208,11 @@ while (distanceF < 3)
      //er dreht sich, bis das Hindernis rechts von ihm ist
      while (distanceR > 3)
      {
-       digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
-       digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
+      digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
+      checkDistanceRight ();
+      checkDistanceLeft ();
+      checkDistanceFront ();
      }
      
    }
@@ -233,13 +232,30 @@ if (distanceR < 3)
     {
       digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
+      checkDistanceRight ();
+      checkDistanceLeft ();
+      checkDistanceFront ();
     };
   }
 
+  if ((ir_sensor_Left = 1) && (ir_sensor_HalfLeft = 1) && (ir_sensor_LeftFromMiddle = 1) && 
+  (ir_sensor_MiddleLeft = 1) && (ir_sensor_MiddleRight = 1) && (ir_sensor_RightFromMiddle = 1)
+  && (ir_sensor_HalfRight = 1) && (ir_sensor_Right = 1))
+  {
+    checkDistanceRight;
+    while (distanceR < 3)
+    {
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
+      checkDistanceRight;
+    }
+      
+  }
+    
+  }
 
 }
 
-int LineFollowing ();
+int LineFollowing ()
 {
   ir_sensor_Left = digitalRead(A0);
   ir_sensor_HalfLeft = digitalRead(A1);
@@ -252,47 +268,98 @@ int LineFollowing ();
 
   if (ir_sensor_RightFromMiddle == 1)
   {
-    analogWrite(LEFT_PWM_PIN_FORWARD, 200);
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 190);
+    ir_sensor_RightFromMiddle = digitalRead(A5);
+    while (ir_sensor_RightFromMiddle == 1)
+    {
+      ir_sensor_RightFromMiddle = digitalRead(A5);
+      analogWrite(LEFT_PWM_PIN_FORWARD, 200);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 190);
+    }
   }
+
   else if (ir_sensor_LeftFromMiddle == 1)
   {
-    analogWrite(LEFT_PWM_PIN_FORWARD, 190);
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
+    ir_sensor_LeftFromMiddle = digitalRead(A2);
+    while (ir_sensor_LeftFromMiddle == 1)
+    {
+      analogWrite(LEFT_PWM_PIN_FORWARD, 190);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
+      ir_sensor_LeftFromMiddle = digitalRead(A2);
+    }
   }
+
   else if (ir_sensor_HalfRight == 1)
   {
-    analogWrite(LEFT_PWM_PIN_FORWARD, 200);
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 180);
+    ir_sensor_HalfRight = digitalRead(8);
+    while (ir_sensor_HalfRight == 1);
+    {
+      analogWrite(LEFT_PWM_PIN_FORWARD, 200);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 180);
+      ir_sensor_HalfRight = digitalRead(8);
+    }
   }
+
   else if (ir_sensor_HalfLeft == 1)
   {
-    analogWrite(LEFT_PWM_PIN_FORWARD, 180);
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
+    ir_sensor_HalfLeft = digitalRead(A1);
+    while (ir_sensor_HalfLeft == 1)
+    {
+      analogWrite(LEFT_PWM_PIN_FORWARD, 180);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
+      ir_sensor_HalfLeft = digitalRead(A1);
+    }
   }
   else if (ir_sensor_Right == 1)
   {
-    analogWrite(LEFT_PWM_PIN_FORWARD, 200);
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 170);
-  }
-  else if (ir_sensor_Left == 1)
-  {
-    analogWrite(LEFT_PWM_PIN_FORWARD, 170);
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
-  }
-  else if ((ir_sensor_MiddleLeft == 1) && (ir_sensor_MiddleRight == 0))
-  {
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
-    analogWrite(LEFT_PWM_PIN_FORWARD, 195);
-  }
-  else if ((ir_sensor_MiddleLeft == 0) && (ir_sensor_MiddleRight == 1))
-  {
-    analogWrite(RIGHT_PWM_PIN_FORWARD, 195);
-    analogWrite(LEFT_PWM_PIN_FORWARD, 200);
-  }
+    ir_sensor_Right = digitalRead(A1);
+    while (ir_sensor_Right == 1)
+    {
+      analogWrite(LEFT_PWM_PIN_FORWARD, 200);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 170);
+      ir_sensor_Right = digitalRead(A1);
+    }
   }
 
-int drive();
+  else if (ir_sensor_Left == 1)
+  {
+    ir_sensor_Left = digitalRead(A1);
+    while (ir_sensor_Left == 1)
+    {
+    analogWrite(LEFT_PWM_PIN_FORWARD, 170);
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
+    ir_sensor_Left = digitalRead(A1);
+    }
+
+  }
+
+  else if ((ir_sensor_MiddleLeft == 1) && (ir_sensor_MiddleRight == 0))
+  {
+    ir_sensor_MiddleLeft = digitalRead(A1);
+    ir_sensor_MiddleRight = digitalRead(A1);
+    while ((ir_sensor_MiddleLeft == 1) && (ir_sensor_MiddleRight == 0))
+    {
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
+      analogWrite(LEFT_PWM_PIN_FORWARD, 195);
+      ir_sensor_MiddleLeft = digitalRead(A1);
+      ir_sensor_MiddleRight = digitalRead(A1);
+    }
+  }
+
+  else if ((ir_sensor_MiddleLeft == 0) && (ir_sensor_MiddleRight == 1))
+  {
+    ir_sensor_MiddleLeft = digitalRead(A1);
+    ir_sensor_MiddleRight = digitalRead(A1);
+    while ((ir_sensor_MiddleLeft == 0) && (ir_sensor_MiddleRight == 1))
+    {
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 195);
+      analogWrite(LEFT_PWM_PIN_FORWARD, 200);
+      ir_sensor_MiddleLeft = digitalRead(A1);
+      ir_sensor_MiddleRight = digitalRead(A1);
+    }
+  }
+}
+
+int drive()
 {
 checkDistanceFront;
 checkDistanceLeft;
@@ -309,7 +376,7 @@ while (distanceF <3 )
   }
 }
 
-void setup();
+void setup()
 {
   Serial.begin(9600);
 
@@ -324,7 +391,7 @@ void setup();
   digitalWrite(RIGHT_ENABLE_PIN, HIGH);
 }
 
-void loop();
+void loop()
 {
   drive();
 }
