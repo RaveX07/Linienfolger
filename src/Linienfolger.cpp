@@ -41,7 +41,6 @@ int ir_sensor_MiddleRight = A4;
 int ir_sensor_RightFromMiddle = A5;
 int ir_sensor_HalfRight = 8;
 int ir_sensor_Right = 9;
-//int ir_sensor_array[8] = {A0, A1, A2, A3, A4, A5, 8, 9};
 
 
 //function for checking for objects on the front
@@ -64,22 +63,10 @@ int checkDistanceFront(){
 }
 
 //function for checking for objects on the sides
-int checkDistanceSides(){
+int checkDistanceRight(){
   //make sure that the trigpins are disabled
   digitalWrite(US_TRIGGER, LOW);
   delayMicroseconds(2);
-
-  //Left check
-  
-  //send ultrasonic signal
-  digitalWrite(US_TRIGGER, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(US_TRIGGER, LOW);
-
-  //messure duration and calculate distance
-  durationL = pulseIn(US_LEFT_ECHO, HIGH);
-  distanceL = durationL*0.034/2; //distance in cm
-
 
   //Right check
   
@@ -91,6 +78,21 @@ int checkDistanceSides(){
   //messure duration and calculate distance
   durationR = pulseIn(US_RIGHT_ECHO, HIGH);
   distanceR = durationR*0.034/2; //distance in cm
+}
+
+int checkDistanceLeft () {
+    //Left check
+  
+  //send ultrasonic signal
+  digitalWrite(US_TRIGGER, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(US_TRIGGER, LOW);
+
+  //messure duration and calculate distance
+  durationL = pulseIn(US_LEFT_ECHO, HIGH);
+  distanceL = durationL*0.034/2; //distance in cm
+
+
 }
 
 int drive ()
