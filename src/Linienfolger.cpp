@@ -92,8 +92,154 @@ int checkDistanceLeft () {
 
 }
 
+int dogdeObstacle () {
+checkDistanceFront;
+checkDistanceLeft;
+checkDistanceRight;
+//Roboter trifft auf Hindernismawimal 3 cm vor ihm
+while (distanceF < 3)
+{
+  checkDistanceRight ();
+  checkDistanceLeft ();
+  checkDistanceFront ();
+//Roboter dreht sich um sich selbst, bis das Hindernis neben ihm ist
+  while ((distanceL > 3) && (distanceR > 3))
+  {
+    checkDistanceRight ();
+    checkDistanceLeft ();
+    checkDistanceFront ();
+    digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
+    digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
+  };
+//das Hindenis ist nun rechts neben ihm
+  if (distanceR < 3)
+  {
+    checkDistanceRight ();
+    checkDistanceLeft ();
+    checkDistanceFront ();
+//Er fähr solange gerade aus, bis das Hindernis nicht mehr neben ihm ist
+    while (distanceR < 3)
+    {
+      checkDistanceRight ();
+      checkDistanceLeft ();
+      checkDistanceFront ();
 
-int drive()
+      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
+    };
+  }
+  //nun ist er am Hinderniss seitlich vorbeigefahren
+  if ((distanceL > 3) && (distanceR > 3) && (distanceF > 3))
+  {
+    checkDistanceRight ();
+    checkDistanceLeft ();
+    checkDistanceFront ();
+//nun fährt er eine Kurve nach rechts, bis er auf das Hindernis trifft
+    while ((distanceL > 3) && (distanceR > 3) && (distanceF > 3))
+    {
+      checkDistanceRight ();
+      checkDistanceLeft ();
+      checkDistanceFront ();
+
+      digitalWrite (LEFT_PWM_PIN_FORWARD, 50);
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
+    };
+  }
+
+  checkDistanceFront;
+  checkDistanceLeft;
+  checkDistanceRight;
+//das Hinderniss ist vor ihm
+  if (distanceF < 3)
+  {
+    checkDistanceRight ();
+    checkDistanceLeft ();
+    checkDistanceFront ();
+//er dreht sich um die eigene Achse, bis das Hindernis neben ihm ist
+    while ((distanceL > 3) && (distanceR > 3))
+    {
+      checkDistanceRight ();
+      checkDistanceLeft ();
+      checkDistanceFront ();
+
+      digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
+    }
+    
+  }
+  checkDistanceFront;
+  checkDistanceLeft;
+  checkDistanceRight;
+//das Hindernis ist nun rechts von ihm
+  if (distanceR < 3)
+  {
+    checkDistanceRight ();
+    checkDistanceLeft ();
+    checkDistanceFront ();
+//er fährt am Hindernis entlang, bis es nicht mehr rechts von ihm ist
+    while (distanceR < 3)
+    {
+      checkDistanceRight ();
+      checkDistanceLeft ();
+      checkDistanceFront ();
+
+      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
+    }
+  }
+  checkDistanceRight ();
+  checkDistanceLeft ();
+  checkDistanceFront ();
+//er ist nun parallel zur Weiterführung der Linie seitlich am Hindernis vorbeigefahren
+  if ((distanceL > 3) && (distanceR > 3) && (distanceF > 3))
+    {
+      checkDistanceRight ();
+      checkDistanceLeft ();
+      checkDistanceFront ();
+      //er dreht sich um die eigene Achse, bis er das Hindernis wieder mit einem Sensor erkennt
+      while ((distanceL > 3) && (distanceR > 3) && (distanceF > 3))
+      {
+        checkDistanceRight ();
+        checkDistanceLeft ();
+        checkDistanceFront ();
+        digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
+        digitalWrite (RIGHT_PWM_PIN_FORWARD, 0);
+      }
+  }
+  //das Hindernis befindet sich vor ihm
+   if (distanceF < 3)
+   {
+     //er dreht sich, bis das Hindernis rechts von ihm ist
+     while (distanceR > 3)
+     {
+       digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
+       digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
+     }
+     
+   }
+checkDistanceRight ();
+checkDistanceLeft ();
+checkDistanceFront ();
+//das Hinderniss befindet sich nun rechts von ihm
+if (distanceR < 3)
+  {
+    checkDistanceRight ();
+    checkDistanceLeft ();
+    checkDistanceFront ();
+  //er fährt solange, bis ein IR Sensor anschlägt oder das Hindernis nicht mehr rechts von ihm ist
+    while ((ir_sensor_Left = 0) && (ir_sensor_HalfLeft = 0) && (ir_sensor_LeftFromMiddle = 0) && 
+    (ir_sensor_MiddleLeft = 0) && (ir_sensor_MiddleRight = 0) && (ir_sensor_RightFromMiddle = 0)
+    && (ir_sensor_HalfRight = 0) && (ir_sensor_Right = 0) && (distanceR < 3))
+    {
+      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
+      digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
+    };
+  }
+
+
+}
+
+int LineFollowing ();
 {
   ir_sensor_Left = digitalRead(A0);
   ir_sensor_HalfLeft = digitalRead(A1);
@@ -144,24 +290,41 @@ int drive()
     analogWrite(RIGHT_PWM_PIN_FORWARD, 195);
     analogWrite(LEFT_PWM_PIN_FORWARD, 200);
   }
+  }
+
+int drive();
+{
+checkDistanceFront;
+checkDistanceLeft;
+checkDistanceRight;
+//wenn kein Hindernis erkannt wird, folgt er der Linie wie gehabt
+while (distanceF < 3)
+  {
+    LineFollowing;
+  }
+//wenn ein Hinderniss voraus ist, umgeht er dies
+while (distanceF <3 )
+  {
+    dogdeObstacle;
+  }
 }
 
-  void setup()
-  {
-    Serial.begin(9600);
+void setup();
+{
+  Serial.begin(9600);
 
-    pinMode(LEFT_PWM_PIN_BACKWARD, OUTPUT);
-    pinMode(LEFT_PWM_PIN_FORWARD, OUTPUT);
-    pinMode(LEFT_ENABLE_PIN, OUTPUT);
-    pinMode(RIGHT_ENABLE_PIN, OUTPUT);
-    pinMode(RIGHT_PWM_PIN_BACKWARD, OUTPUT);
-    pinMode(RIGHT_PWM_PIN_FORWARD, OUTPUT);
+  pinMode(LEFT_PWM_PIN_BACKWARD, OUTPUT);
+  pinMode(LEFT_PWM_PIN_FORWARD, OUTPUT);
+  pinMode(LEFT_ENABLE_PIN, OUTPUT);
+  pinMode(RIGHT_ENABLE_PIN, OUTPUT);
+  pinMode(RIGHT_PWM_PIN_BACKWARD, OUTPUT);
+  pinMode(RIGHT_PWM_PIN_FORWARD, OUTPUT);
 
-    digitalWrite(LEFT_ENABLE_PIN, HIGH);
-    digitalWrite(RIGHT_ENABLE_PIN, HIGH);
-  }
+  digitalWrite(LEFT_ENABLE_PIN, HIGH);
+  digitalWrite(RIGHT_ENABLE_PIN, HIGH);
+}
 
-  void loop()
-  {
-    drive();
-  }
+void loop();
+{
+  drive();
+}
