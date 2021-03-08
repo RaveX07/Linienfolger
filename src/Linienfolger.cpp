@@ -42,6 +42,17 @@ int ir_sensor_RightFromMiddle = A5;
 int ir_sensor_HalfRight = 8;
 int ir_sensor_Right = 9;
 
+int readAllIrSensors(){
+  ir_sensor_Left = digitalRead(A0);
+  ir_sensor_HalfLeft = digitalRead(A1);
+  ir_sensor_LeftFromMiddle = digitalRead(A2);
+  ir_sensor_MiddleLeft = digitalRead(A3);
+  ir_sensor_MiddleRight = digitalRead(A4);
+  ir_sensor_RightFromMiddle = digitalRead(A5);
+  ir_sensor_HalfRight = digitalRead(8);
+  ir_sensor_Right = digitalRead(9);
+}
+
 //function for checking for objects on the front
 int checkDistanceFront()
 {
@@ -356,7 +367,42 @@ int LineFollowing ()
       ir_sensor_MiddleLeft = digitalRead(A1);
       ir_sensor_MiddleRight = digitalRead(A1);
     }
+  } else if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+    findline();
   }
+}
+
+int findline(){
+  readAllIrSensors();
+  if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+    while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+      analogWrite(LEFT_PWM_PIN_FORWARD, 125);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
+      delay(100);
+      analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+      readAllIrSensors();
+      if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+        analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+        delay(100);
+        analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+        readAllIrSensors();
+        if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+          analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
+          delay(200);
+          analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+          readAllIrSensors();
+          if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+            delay(100);
+            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+            readAllIrSensors();
+          }
+        }
+      }
+    }
+  }
+
 }
 
 int drive()
@@ -364,13 +410,14 @@ int drive()
 checkDistanceFront;
 checkDistanceLeft;
 checkDistanceRight;
+readAllIrSensors();
 //wenn kein Hindernis erkannt wird, folgt er der Linie wie gehabt
 while (distanceF < 3)
   {
     LineFollowing;
   }
 //wenn ein Hinderniss voraus ist, umgeht er dies
-while (distanceF <3 )
+while (distanceF < 3)
   {
     dogdeObstacle;
   }
