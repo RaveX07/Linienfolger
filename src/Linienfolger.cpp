@@ -33,14 +33,14 @@ int distanceR;
 int UltrasonicRight = 9;
 
 //IR-Sensors
-int ir_sensor_Left = A0;
-int ir_sensor_HalfLeft = A1;
-int ir_sensor_LeftFromMiddle = A2;
-int ir_sensor_MiddleLeft = A3;
-int ir_sensor_MiddleRight = A4;
-int ir_sensor_RightFromMiddle = A5;
-int ir_sensor_HalfRight = 8;
-int ir_sensor_Right = 9;
+int ir_sensor_Left = 0;
+int ir_sensor_HalfLeft = 0;
+int ir_sensor_LeftFromMiddle = 0;
+int ir_sensor_MiddleLeft = 0;
+int ir_sensor_MiddleRight = 0;
+int ir_sensor_RightFromMiddle = 0;
+int ir_sensor_HalfRight = 0;
+int ir_sensor_Right = 0;
 
 int readAllIrSensors(){
   ir_sensor_Left = digitalRead(A0);
