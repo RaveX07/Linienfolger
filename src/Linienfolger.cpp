@@ -42,7 +42,7 @@ int ir_sensor_RightFromMiddle = 0;
 int ir_sensor_HalfRight = 0;
 int ir_sensor_Right = 0;
 
-int readAllIrSensors(){
+int readAllIRSensors(){
   ir_sensor_Left = digitalRead(A0);
   ir_sensor_HalfLeft = digitalRead(A1);
   ir_sensor_LeftFromMiddle = digitalRead(A2);
@@ -367,21 +367,27 @@ int LineFollowing ()
       ir_sensor_MiddleLeft = digitalRead(A1);
       ir_sensor_MiddleRight = digitalRead(A1);
     }
-  } else if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+  } else if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight)
+    && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0)
+    && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
     findline();
-  }
+    }
 }
 
 int findline(){
-  readAllIrSensors();
-  if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
-    while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+  readAllIRSensors();
+  if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+  (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+  (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+    while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+    (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+    (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
       analogWrite(LEFT_PWM_PIN_FORWARD, 125);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
       delay(100);
       analogWrite(LEFT_PWM_PIN_FORWARD, 0);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-      readAllIrSensors();
+      readAllIRSensors();
       if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
         analogWrite(LEFT_PWM_PIN_FORWARD, 100);
         delay(100);
