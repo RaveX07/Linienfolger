@@ -236,6 +236,7 @@ if (distanceR < 3)
     checkDistanceRight ();
     checkDistanceLeft ();
     checkDistanceFront ();
+    readAllIRSensors;
   //er fährt solange, bis ein IR Sensor anschlägt oder das Hindernis nicht mehr rechts von ihm ist
     while ((ir_sensor_Left = 0) && (ir_sensor_HalfLeft = 0) && (ir_sensor_LeftFromMiddle = 0) && 
     (ir_sensor_MiddleLeft = 0) && (ir_sensor_MiddleRight = 0) && (ir_sensor_RightFromMiddle = 0)
@@ -246,6 +247,7 @@ if (distanceR < 3)
       checkDistanceRight ();
       checkDistanceLeft ();
       checkDistanceFront ();
+      readAllIRSensors;
     };
   }
 
@@ -253,11 +255,13 @@ if (distanceR < 3)
   (ir_sensor_MiddleLeft = 1) && (ir_sensor_MiddleRight = 1) && (ir_sensor_RightFromMiddle = 1)
   && (ir_sensor_HalfRight = 1) && (ir_sensor_Right = 1))
   {
+    readAllIRSensors;
     checkDistanceRight;
     while (distanceR < 3)
     {
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
       checkDistanceRight;
+      readAllIRSensors;
     }
       
   }
