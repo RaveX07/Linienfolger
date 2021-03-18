@@ -396,17 +396,17 @@ int findline(){
         analogWrite(LEFT_PWM_PIN_FORWARD, 100);
         delay(100);
         analogWrite(LEFT_PWM_PIN_FORWARD, 0);
-        readAllIrSensors();
+        readAllIRSensors();
         if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
           analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
           delay(200);
           analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-          readAllIrSensors();
+          readAllIRSensors();
           if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
             delay(100);
             analogWrite(LEFT_PWM_PIN_FORWARD, 0);
-            readAllIrSensors();
+            readAllIRSensors();
           }
         }
       }
@@ -420,7 +420,7 @@ int drive()
 checkDistanceFront;
 checkDistanceLeft;
 checkDistanceRight;
-readAllIrSensors();
+readAllIRSensors();
 //wenn kein Hindernis erkannt wird, folgt er der Linie wie gehabt
 while (distanceF < 3)
   {
