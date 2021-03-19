@@ -155,9 +155,9 @@ while (distanceF < 3)
     };
   }
 
-  checkDistanceFront;
-  checkDistanceLeft;
-  checkDistanceRight;
+  checkDistanceFront();
+  checkDistanceLeft();
+  checkDistanceRight();
 //das Hinderniss ist vor ihm
   if (distanceF < 3)
   {
@@ -175,9 +175,9 @@ while (distanceF < 3)
     }
     
   }
-  checkDistanceFront;
-  checkDistanceLeft;
-  checkDistanceRight;
+  checkDistanceFront();
+  checkDistanceLeft();
+  checkDistanceRight();
 //das Hindernis ist nun rechts von ihm
   if (distanceR < 3)
   {
@@ -247,21 +247,21 @@ if (distanceR < 3)
       checkDistanceRight ();
       checkDistanceLeft ();
       checkDistanceFront ();
-      readAllIRSensors;
+      readAllIRSensors();
     };
   }
 
-  if ((ir_sensor_Left = 1) && (ir_sensor_HalfLeft = 1) && (ir_sensor_LeftFromMiddle = 1) && 
-  (ir_sensor_MiddleLeft = 1) && (ir_sensor_MiddleRight = 1) && (ir_sensor_RightFromMiddle = 1)
-  && (ir_sensor_HalfRight = 1) && (ir_sensor_Right = 1))
+  if ((ir_sensor_Left == 1) && (ir_sensor_HalfLeft == 1) && (ir_sensor_LeftFromMiddle == 1) && 
+  (ir_sensor_MiddleLeft == 1) && (ir_sensor_MiddleRight == 1) && (ir_sensor_RightFromMiddle == 1)
+  && (ir_sensor_HalfRight == 1) && (ir_sensor_Right == 1))
   {
-    readAllIRSensors;
-    checkDistanceRight;
+    readAllIRSensors();
+    checkDistanceRight();
     while (distanceR < 3)
     {
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
-      checkDistanceRight;
-      readAllIRSensors;
+      checkDistanceRight();
+      readAllIRSensors();
     }
       
   }
