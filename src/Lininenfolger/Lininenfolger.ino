@@ -108,7 +108,7 @@ int dogdeObstacle () {
 checkDistanceFront;
 checkDistanceLeft;
 checkDistanceRight;
-//Roboter trifft auf Hindernismawimal 3 cm vor ihm
+//Roboter trifft auf Hindernis maximal 3 cm vor ihm
 while (distanceF < 3)
 {
   checkDistanceRight ();
@@ -204,11 +204,11 @@ while (distanceF < 3)
       checkDistanceRight ();
       checkDistanceLeft ();
       checkDistanceFront ();
-      //er dreht sich um die eigene Achse, bis er das Hindernis wieder mit einem Sensor erkennt
+      //er fährt eine Kurve, bis er das Hindernis wieder mit einem Sensor erkennt
       while ((distanceL > 3) && (distanceR > 3) && (distanceF > 3))
       {
         digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
-        digitalWrite (RIGHT_PWM_PIN_FORWARD, 0);
+        digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
         checkDistanceRight ();
         checkDistanceLeft ();
         checkDistanceFront ();
@@ -395,13 +395,17 @@ int findline(){
       readAllIRSensors();
       if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
         analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+        analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
         delay(100);
         analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+        analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
         readAllIRSensors();
         if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
           analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
+          analogWrite(LEFT_PWM_PIN_FORWARD, 50);
           delay(200);
           analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+          analogWrite(LEFT_PWM_PIN_FORWARD, 0);
           readAllIRSensors();
           if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
