@@ -84,7 +84,7 @@ int checkDistanceRight(){
   delayMicroseconds(10);
   digitalWrite(US_TRIGGER, LOW);
 
-  //messure duration and calculate distance
+  //meassure duration and calculate distance
   durationR = pulseIn(US_RIGHT_ECHO, HIGH);
   distanceR = durationR*0.034/2; //distance in cm
 }
