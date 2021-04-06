@@ -71,7 +71,7 @@ int checkDistanceFront()
   distanceF = durationF * 0.034 / 2; //distance in cm
 }
 
-//function for checking for objects on the sides
+//function for checking for objects on the right side
 int checkDistanceRight(){
   //make sure that the trigpins are disabled
   digitalWrite(US_TRIGGER, LOW);
@@ -89,6 +89,7 @@ int checkDistanceRight(){
   distanceR = durationR*0.034/2; //distance in cm
 }
 
+//function for checking for objects on the left side
 int checkDistanceLeft () {
     //Left check
   
@@ -129,7 +130,7 @@ while (distanceF < 3)
     checkDistanceRight ();
     checkDistanceLeft ();
     checkDistanceFront ();
-//Er fähr solange gerade aus, bis das Hindernis nicht mehr neben ihm ist
+//Er fährt solange gerade aus, bis das Hindernis nicht mehr neben ihm ist
     while (distanceR < 3)
     {
       digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
