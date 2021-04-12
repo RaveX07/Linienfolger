@@ -44,7 +44,7 @@ int readAllIRSensors(){
   ir_sensor_MiddleRight = digitalRead(A4);
   ir_sensor_RightFromMiddle = digitalRead(A5);
   ir_sensor_HalfRight = digitalRead(0); 
-  ir_sensor_Right = digitalRead(?);
+  ir_sensor_Right = digitalRead(7);
 }
 
 //function for checking for objects on the front
