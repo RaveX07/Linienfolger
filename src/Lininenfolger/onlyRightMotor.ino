@@ -1,12 +1,5 @@
 #include <Arduino.h>
 
-//Left Motor
-#define LEFT_ENABLE_PIN 12
-#define LEFT_PWM_PIN_FORWARD 11
-#define LEFT_PWM_PIN_BACKWARD 10
-
-//PWM PINS: 11, 10, 9, 6, 5, 3
-
 //Right Motor
 #define RIGHT_ENABLE_PIN 7
 #define RIGHT_PWM_PIN_FORWARD 6
@@ -118,7 +111,6 @@ while (distanceF < 3)
 //Roboter dreht sich um sich selbst, bis das Hindernis neben ihm ist
   while ((distanceL > 3) && (distanceR > 3))
   {
-    digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
     digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
     checkDistanceRight ();
     checkDistanceLeft ();
@@ -133,7 +125,6 @@ while (distanceF < 3)
 //Er fährt solange gerade aus, bis das Hindernis nicht mehr neben ihm ist
     while (distanceR < 3)
     {
-      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
       checkDistanceRight ();
       checkDistanceLeft ();
@@ -149,7 +140,6 @@ while (distanceF < 3)
 //nun fährt er eine Kurve nach rechts, bis er auf das Hindernis trifft
     while ((distanceL > 3) && (distanceR > 3) && (distanceF > 3))
     {
-      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
       checkDistanceRight ();
       checkDistanceLeft ();
@@ -169,7 +159,6 @@ while (distanceF < 3)
 //er dreht sich um die eigene Achse, bis das Hindernis neben ihm ist
     while ((distanceL > 3) && (distanceR > 3))
     {
-      digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
       checkDistanceRight ();
       checkDistanceLeft ();
@@ -189,7 +178,6 @@ while (distanceF < 3)
 //er fährt am Hindernis entlang, bis es nicht mehr rechts von ihm ist
     while (distanceR < 3)
     {
-      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
       checkDistanceRight ();
       checkDistanceLeft ();
@@ -208,7 +196,6 @@ while (distanceF < 3)
       //er fährt eine Kurve, bis er das Hindernis wieder mit einem Sensor erkennt
       while ((distanceL > 3) && (distanceR > 3) && (distanceF > 3))
       {
-        digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
         digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
         checkDistanceRight ();
         checkDistanceLeft ();
@@ -221,7 +208,6 @@ while (distanceF < 3)
      //er dreht sich, bis das Hindernis rechts von ihm ist
      while (distanceR > 3)
      {
-      digitalWrite (LEFT_PWM_PIN_FORWARD, 0);
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
       checkDistanceRight ();
       checkDistanceLeft ();
@@ -244,7 +230,6 @@ if (distanceR < 3)
     (ir_sensor_MiddleLeft = 0) && (ir_sensor_MiddleRight = 0) && (ir_sensor_RightFromMiddle = 0)
     && (ir_sensor_HalfRight = 0) && (ir_sensor_Right = 0) && (distanceR < 3))
     {
-      digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
       checkDistanceRight ();
       checkDistanceLeft ();
@@ -289,7 +274,6 @@ int LineFollowing ()
     while (ir_sensor_RightFromMiddle == 1)
     {
       ir_sensor_RightFromMiddle = digitalRead(A5);
-      analogWrite(LEFT_PWM_PIN_FORWARD, 200);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 190);
     }
   }
@@ -299,7 +283,6 @@ int LineFollowing ()
     ir_sensor_LeftFromMiddle = digitalRead(A2);
     while (ir_sensor_LeftFromMiddle == 1)
     {
-      analogWrite(LEFT_PWM_PIN_FORWARD, 190);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
       ir_sensor_LeftFromMiddle = digitalRead(A2);
     }
@@ -310,7 +293,6 @@ int LineFollowing ()
     ir_sensor_HalfRight = digitalRead(8);
     while (ir_sensor_HalfRight == 1);
     {
-      analogWrite(LEFT_PWM_PIN_FORWARD, 200);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 180);
       ir_sensor_HalfRight = digitalRead(8);
     }
@@ -321,7 +303,6 @@ int LineFollowing ()
     ir_sensor_HalfLeft = digitalRead(A1);
     while (ir_sensor_HalfLeft == 1)
     {
-      analogWrite(LEFT_PWM_PIN_FORWARD, 180);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
       ir_sensor_HalfLeft = digitalRead(A1);
     }
@@ -331,7 +312,6 @@ int LineFollowing ()
     ir_sensor_Right = digitalRead(A1);
     while (ir_sensor_Right == 1)
     {
-      analogWrite(LEFT_PWM_PIN_FORWARD, 200);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 170);
       ir_sensor_Right = digitalRead(A1);
     }
@@ -342,7 +322,6 @@ int LineFollowing ()
     ir_sensor_Left = digitalRead(A1);
     while (ir_sensor_Left == 1)
     {
-    analogWrite(LEFT_PWM_PIN_FORWARD, 170);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
     ir_sensor_Left = digitalRead(A1);
     }
@@ -356,7 +335,6 @@ int LineFollowing ()
     while ((ir_sensor_MiddleLeft == 1) && (ir_sensor_MiddleRight == 0))
     {
       analogWrite(RIGHT_PWM_PIN_FORWARD, 200);
-      analogWrite(LEFT_PWM_PIN_FORWARD, 195);
       ir_sensor_MiddleLeft = digitalRead(A1);
       ir_sensor_MiddleRight = digitalRead(A1);
     }
@@ -369,7 +347,6 @@ int LineFollowing ()
     while ((ir_sensor_MiddleLeft == 0) && (ir_sensor_MiddleRight == 1))
     {
       analogWrite(RIGHT_PWM_PIN_FORWARD, 195);
-      analogWrite(LEFT_PWM_PIN_FORWARD, 200);
       ir_sensor_MiddleLeft = digitalRead(A1);
       ir_sensor_MiddleRight = digitalRead(A1);
     }
@@ -388,30 +365,22 @@ int findline(){
     while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
     (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
     (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
-      analogWrite(LEFT_PWM_PIN_FORWARD, 125);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
       delay(100);
-      analogWrite(LEFT_PWM_PIN_FORWARD, 0);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
       readAllIRSensors();
       if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
-        analogWrite(LEFT_PWM_PIN_FORWARD, 100);
         analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
         delay(100);
-        analogWrite(LEFT_PWM_PIN_FORWARD, 0);
         analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
         readAllIRSensors();
         if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
           analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
-          analogWrite(LEFT_PWM_PIN_FORWARD, 50);
           delay(200);
           analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-          analogWrite(LEFT_PWM_PIN_FORWARD, 0);
           readAllIRSensors();
           if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
-            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
             delay(100);
-            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
             readAllIRSensors();
           }
         }
@@ -443,14 +412,10 @@ void setup()
 {
   Serial.begin(9600);
 
-  pinMode(LEFT_PWM_PIN_BACKWARD, OUTPUT);
-  pinMode(LEFT_PWM_PIN_FORWARD, OUTPUT);
-  pinMode(LEFT_ENABLE_PIN, OUTPUT);
   pinMode(RIGHT_ENABLE_PIN, OUTPUT);
   pinMode(RIGHT_PWM_PIN_BACKWARD, OUTPUT);
   pinMode(RIGHT_PWM_PIN_FORWARD, OUTPUT);
 
-  digitalWrite(LEFT_ENABLE_PIN, HIGH);
   digitalWrite(RIGHT_ENABLE_PIN, HIGH);
 }
 
