@@ -385,40 +385,291 @@ int findline(){
   if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
   (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
   (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
     while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
     (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
     (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
       analogWrite(LEFT_PWM_PIN_FORWARD, 125);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
-      delay(100);
+      delay(500);
       analogWrite(LEFT_PWM_PIN_FORWARD, 0);
       analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
       readAllIRSensors();
-      if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
-        analogWrite(LEFT_PWM_PIN_FORWARD, 100);
-        analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
-        delay(100);
-        analogWrite(LEFT_PWM_PIN_FORWARD, 0);
-        analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-        readAllIRSensors();
-        if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
-          analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
-          analogWrite(LEFT_PWM_PIN_FORWARD, 50);
-          delay(200);
-          analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-          analogWrite(LEFT_PWM_PIN_FORWARD, 0);
-          readAllIRSensors();
-          if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) && (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) && (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+        while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+        (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+        (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
-            delay(100);
+            analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
+            delay(3000);
             analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+            analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
             readAllIRSensors();
-          }
+
+                while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+                (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+                (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
+                    delay(300);
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                    delay(10)
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
+                    analogWrite(LEFT_PWM_PIN_FORWARD, 50);
+                    delay(6000);
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                    analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                    readAllIRSensors();
+
+                        while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+                        (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+                        (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+                            delay(100);
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                            delay(10)
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+                            analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
+                            delay(3000);
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                            analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                            readAllIRSensors();
+
+            }
+        }
+      }
+    }
+    analogWrite (RIGHT_PWM_PIN_FORWARD, 100)
+    delay(100)
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+    delay(10)
+    analogWrite(LEFT_PWM_PIN_FORWARD, 125);
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
+    delay(500);
+    analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+    readAllIRSensors();
+    
+  }
+  readAllIRSensors();
+  if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+  (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+  (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+    while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+    (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+    (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+      analogWrite(LEFT_PWM_PIN_FORWARD, 125);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
+      delay(1000);
+      analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+      readAllIRSensors();
+
+        while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+        (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+        (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+            analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
+            delay(3000);
+            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+            analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+            readAllIRSensors();
+
+                while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+                (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+                (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
+                    delay(300);
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                    delay(10)
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
+                    analogWrite(LEFT_PWM_PIN_FORWARD, 50);
+                    delay(6000);
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                    analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                    readAllIRSensors();
+
+                        while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+                        (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+                        (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+                            delay(100);
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                            delay(10)
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+                            analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
+                            delay(3000);
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                            analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                            readAllIRSensors();
+
+            }
+        }
+      }
+    }
+    analogWrite (RIGHT_PWM_PIN_FORWARD, 100)
+    delay(100)
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+    delay(10)
+    analogWrite(LEFT_PWM_PIN_FORWARD, 125);
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
+    delay(1000);
+    analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+    readAllIRSensors();
+  }
+    readAllIRSensors();
+  if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+  (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+  (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+    while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+    (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+    (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+      analogWrite(LEFT_PWM_PIN_FORWARD, 125);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
+      delay(1500);
+      analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+      readAllIRSensors();
+
+        while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+        (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+        (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+            analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
+            delay(3000);
+            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+            analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+            readAllIRSensors();
+
+                while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+                (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+                (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
+                    delay(300);
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                    delay(10)
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
+                    analogWrite(LEFT_PWM_PIN_FORWARD, 50);
+                    delay(6000);
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                    analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                    readAllIRSensors();
+
+                        while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+                        (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+                        (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+                            delay(100);
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                            delay(10)
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+                            analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
+                            delay(3000);
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                            analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                            readAllIRSensors();
+
+            }
+        }
+      }
+    }
+    analogWrite (RIGHT_PWM_PIN_FORWARD, 100)
+    delay(100)
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+    delay(10)
+    analogWrite(LEFT_PWM_PIN_FORWARD, 125);
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
+    delay(1500);
+    analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+    readAllIRSensors();
+  }
+    readAllIRSensors();
+  if ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+  (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+  (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+    while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+    (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+    (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+      analogWrite(LEFT_PWM_PIN_FORWARD, 125);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
+      delay(2000);
+      analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+      analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+      readAllIRSensors();
+
+        while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+        (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+        (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+            analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
+            delay(3000);
+            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+            analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+            readAllIRSensors();
+
+                while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+                (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+                (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
+                    delay(300);
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                    delay(10)
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
+                    analogWrite(LEFT_PWM_PIN_FORWARD, 50);
+                    delay(6000);
+                    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                    analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                    readAllIRSensors();
+
+                        while ((ir_sensor_Right == 0) && (ir_sensor_RightFromMiddle == 0) && (ir_sensor_HalfRight) &&
+                        (ir_sensor_MiddleRight == 0) && (ir_sensor_MiddleLeft == 0) && (ir_sensor_HalfLeft == 0) &&
+                        (ir_sensor_LeftFromMiddle == 0) && (ir_sensor_Left == 0)) {
+
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+                            delay(100);
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                            delay(10)
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 100);
+                            analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
+                            delay(3000);
+                            analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+                            analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+                            readAllIRSensors();
+
+            }
         }
       }
     }
   }
-
+    analogWrite (RIGHT_PWM_PIN_FORWARD, 100)
+    delay(100)
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+    delay(10)
+    analogWrite(LEFT_PWM_PIN_FORWARD, 125);
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
+    delay(500);
+    analogWrite(LEFT_PWM_PIN_FORWARD, 0);
+    analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
+    readAllIRSensors();
 }
 
 int drive()
