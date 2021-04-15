@@ -51,7 +51,7 @@ int readAllIRSensors(){
   ir_sensor_MiddleRight = digitalRead(A4);
   ir_sensor_RightFromMiddle = digitalRead(A5);
   ir_sensor_HalfRight = digitalRead(0); 
-  ir_sensor_Right = digitalRead(?);
+  //ir_sensor_Right = digitalRead(?);
 }
 
 int findline(){
@@ -89,7 +89,7 @@ int findline(){
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
                     delay(300);
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-                    delay(10)
+                    delay(10);
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
                     analogWrite(LEFT_PWM_PIN_FORWARD, 50);
                     delay(6000);
@@ -104,7 +104,7 @@ int findline(){
                             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
                             delay(100);
                             analogWrite(LEFT_PWM_PIN_FORWARD, 0);
-                            delay(10)
+                            delay(10);
                             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
                             analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
                             delay(3000);
@@ -116,10 +116,10 @@ int findline(){
         }
       }
     }
-    analogWrite (RIGHT_PWM_PIN_FORWARD, 100)
-    delay(100)
+    analogWrite (RIGHT_PWM_PIN_FORWARD, 100);
+    delay(100);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-    delay(10)
+    delay(10);
     analogWrite(LEFT_PWM_PIN_FORWARD, 125);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
     delay(500);
@@ -162,7 +162,7 @@ int findline(){
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
                     delay(300);
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-                    delay(10)
+                    delay(10);
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
                     analogWrite(LEFT_PWM_PIN_FORWARD, 50);
                     delay(6000);
@@ -177,7 +177,7 @@ int findline(){
                             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
                             delay(100);
                             analogWrite(LEFT_PWM_PIN_FORWARD, 0);
-                            delay(10)
+                            delay(10);
                             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
                             analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
                             delay(3000);
@@ -189,10 +189,10 @@ int findline(){
         }
       }
     }
-    analogWrite (RIGHT_PWM_PIN_FORWARD, 100)
-    delay(100)
+    analogWrite (RIGHT_PWM_PIN_FORWARD, 100);
+    delay(100);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-    delay(10)
+    delay(10);
     analogWrite(LEFT_PWM_PIN_FORWARD, 125);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
     delay(1000);
@@ -234,7 +234,7 @@ int findline(){
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
                     delay(300);
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-                    delay(10)
+                    delay(10);
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
                     analogWrite(LEFT_PWM_PIN_FORWARD, 50);
                     delay(6000);
@@ -249,7 +249,7 @@ int findline(){
                             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
                             delay(100);
                             analogWrite(LEFT_PWM_PIN_FORWARD, 0);
-                            delay(10)
+                            delay(10);
                             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
                             analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
                             delay(3000);
@@ -261,10 +261,10 @@ int findline(){
         }
       }
     }
-    analogWrite (RIGHT_PWM_PIN_FORWARD, 100)
-    delay(100)
+    analogWrite (RIGHT_PWM_PIN_FORWARD, 100);
+    delay(100);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-    delay(10)
+    delay(10);
     analogWrite(LEFT_PWM_PIN_FORWARD, 125);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
     delay(1500);
@@ -306,7 +306,7 @@ int findline(){
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
                     delay(300);
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-                    delay(10)
+                    delay(10);
                     analogWrite(RIGHT_PWM_PIN_FORWARD, 100);
                     analogWrite(LEFT_PWM_PIN_FORWARD, 50);
                     delay(6000);
@@ -321,7 +321,7 @@ int findline(){
                             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
                             delay(100);
                             analogWrite(LEFT_PWM_PIN_FORWARD, 0);
-                            delay(10)
+                            delay(10);
                             analogWrite(LEFT_PWM_PIN_FORWARD, 100);
                             analogWrite(RIGHT_PWM_PIN_FORWARD, 50);
                             delay(3000);
@@ -334,10 +334,10 @@ int findline(){
       }
     }
   }
-    analogWrite (RIGHT_PWM_PIN_FORWARD, 100)
-    delay(100)
+    analogWrite (RIGHT_PWM_PIN_FORWARD, 100);
+    delay(100);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 0);
-    delay(10)
+    delay(10);
     analogWrite(LEFT_PWM_PIN_FORWARD, 125);
     analogWrite(RIGHT_PWM_PIN_FORWARD, 125);
     delay(500);
