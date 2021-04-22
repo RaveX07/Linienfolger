@@ -669,7 +669,7 @@ int LineFollowing ()
 }
 
 int drive()
-{
+{ 
 checkDistanceFront();
 checkDistanceLeft();
 checkDistanceRight();
