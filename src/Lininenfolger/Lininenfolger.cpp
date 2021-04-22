@@ -27,7 +27,7 @@ int distanceL;
 
 //Ultrasonic Sensor Right
 #define US_RIGHT_ECHO 2
-;long durationR;
+long durationR;
 int distanceR;
 
 //IR-Sensors
@@ -48,7 +48,6 @@ int readAllIRSensors(){
   ir_sensor_MiddleRight = digitalRead(A4);
   ir_sensor_RightFromMiddle = digitalRead(A5);
   ir_sensor_HalfRight = digitalRead(0); 
-  ir_sensor_Right = digitalRead(9);
 }
 
 //function for checking for objects on the front
@@ -103,9 +102,9 @@ int checkDistanceLeft () {
 }
 
 int dogdeObstacle () {
-checkDistanceFront;
-checkDistanceLeft;
-checkDistanceRight;
+checkDistanceFront();
+checkDistanceLeft();
+checkDistanceRight();
 //Roboter trifft auf Hindernis maximal 3 cm vor ihm
 while (distanceF < 3)
 {
@@ -174,23 +173,23 @@ while (distanceF < 3)
     }
     
   }
-  checkDistanceFront;
-  checkDistanceLeft;
-  checkDistanceRight;
+  checkDistanceFront();
+  checkDistanceLeft();
+  checkDistanceRight();
 //das Hindernis ist nun rechts von ihm
   if (distanceR < 3)
   {
-    checkDistanceRight ();
-    checkDistanceLeft ();
-    checkDistanceFront ();
+    checkDistanceRight();
+    checkDistanceLeft();
+    checkDistanceFront();
 //er fährt am Hindernis entlang, bis es nicht mehr rechts von ihm ist
     while (distanceR < 3)
     {
       digitalWrite (LEFT_PWM_PIN_FORWARD, 100);
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 100);
-      checkDistanceRight ();
-      checkDistanceLeft ();
-      checkDistanceFront ();
+      checkDistanceRight();
+      checkDistanceLeft();
+      checkDistanceFront();
     }
   }
   checkDistanceRight ();
@@ -246,7 +245,7 @@ if (distanceR < 3)
       checkDistanceRight ();
       checkDistanceLeft ();
       checkDistanceFront ();
-      readAllIRSensors;
+      readAllIRSensors();
     };
   }
 
@@ -254,13 +253,13 @@ if (distanceR < 3)
   (ir_sensor_MiddleLeft = 1) && (ir_sensor_MiddleRight = 1) && (ir_sensor_RightFromMiddle = 1)
   && (ir_sensor_HalfRight = 1) && (ir_sensor_Right = 1))
   {
-    readAllIRSensors;
-    checkDistanceRight;
+    readAllIRSensors();
+    checkDistanceRight();
     while (distanceR < 3)
     {
       digitalWrite (RIGHT_PWM_PIN_FORWARD, 50);
-      checkDistanceRight;
-      readAllIRSensors;
+      checkDistanceRight();
+      readAllIRSensors();
     }
       
   }
@@ -671,19 +670,19 @@ int findline(){
 
 int drive()
 {
-checkDistanceFront;
-checkDistanceLeft;
-checkDistanceRight;
+checkDistanceFront();
+checkDistanceLeft();
+checkDistanceRight();
 readAllIRSensors();
 //wenn kein Hindernis erkannt wird, folgt er der Linie wie gehabt
 while (distanceF < 3)
   {
-    LineFollowing;
+    LineFollowing();
   }
 //wenn ein Hinderniss voraus ist, umgeht er dies
 while (distanceF < 3)
   {
-    dogdeObstacle;
+    dogdeObstacle();
   }
 }
 
