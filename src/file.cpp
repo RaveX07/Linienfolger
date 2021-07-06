@@ -8,24 +8,20 @@
 #define RIGHT_PWM_PIN_L 6
 #define RIGHT_PWM_PIN_R 5
 
-#define IR_RIGHT A0
-#define IR_BETWEEN_RIGHT A1
-#define IR_MID_RIGHT A2
-#define IR_MID_LEFT A3
-#define IR_BETWEEN_LEFT A4
-#define IR_LEFT A5
+#define IR_LEFT A0
+#define IR_MID_LEFT A5
+#define IR_MID_RIGHT A4
+#define IR_RIGHT A3
 
 QTRSensors qtr;
 
-const uint8_t SensorCount = 6;
+const uint8_t SensorCount = 4;
 uint16_t sensorValues[SensorCount];
 
-#define sensorRight sensorValues[0]
-#define sensorBetweenRight sensorValues[1]
+#define sensorLeft sensorValues[0]
+#define sensorMiddleLeft sensorValues[1]
 #define sensorMiddleRight sensorValues[2]
-#define sensorMiddleLeft sensorValues[3]
-#define sensorBetweenLeft sensorValues[4]
-#define sensorLeft sensorValues[5]
+#define sensorRight sensorValues[3]
 
 #define blackWhiteValue 550
 
@@ -44,7 +40,7 @@ void setup()
     digitalWrite(RIGHT_EN_PIN, HIGH);
 
     qtr.setTypeAnalog();
-    qtr.setSensorPins((const uint8_t[]){A0, A1, A2, A3, A4, A5}, SensorCount);
+    qtr.setSensorPins((const uint8_t[]){A0, A5, A4, A3}, SensorCount);
 
     delay(500);
     pinMode(LED_BUILTIN, OUTPUT);
@@ -117,7 +113,7 @@ void turn(int speed, bool direction)
 void loop()
 {
 
-    qtr.read(sensorValues);
+    qtr.readCalibrated(sensorValues);
     for (auto &&sensor : sensorValues)
     {
         Serial.print(sensor);
@@ -130,11 +126,11 @@ void loop()
     {
         driveForward(100);
     }
-    else if ((sensorBetweenLeft > blackWhiteValue && sensorLeft > blackWhiteValue) || (sensorLeft > blackWhiteValue) || (sensorBetweenLeft > blackWhiteValue))
+    else if (sensorLeft > blackWhiteValue)
     {
         correct(75, false);
     }
-    else if ((sensorBetweenRight > blackWhiteValue && sensorRight > blackWhiteValue) || (sensorRight > blackWhiteValue) || (sensorBetweenRight > blackWhiteValue))
+    else if (sensorRight > blackWhiteValue)
     {
         correct(65, true);
     }
@@ -144,8 +140,8 @@ void loop()
         for (int i = 0; i < 1000; i++)
         {
             delay(1);
-            qtr.read(sensorValues);
-            if ((sensorLeft < blackWhiteValue) && (sensorBetweenLeft < blackWhiteValue) && (sensorMiddleLeft < blackWhiteValue) && (sensorMiddleRight < blackWhiteValue) && (sensorBetweenRight < blackWhiteValue) && (sensorRight < blackWhiteValue))
+            qtr.readCalibrated(sensorValues);
+            if ((sensorLeft > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorRight > blackWhiteValue))
             {
                 return;
             }
@@ -154,8 +150,8 @@ void loop()
         for (int i = 0; i < 2000; i++)
         {
             delay(1);
-            qtr.read(sensorValues);
-            if ((sensorLeft < blackWhiteValue) && (sensorBetweenLeft < blackWhiteValue) && (sensorMiddleLeft < blackWhiteValue) && (sensorMiddleRight < blackWhiteValue) && (sensorBetweenRight < blackWhiteValue) && (sensorRight < blackWhiteValue))
+            qtr.readCalibrated(sensorValues);
+            if ((sensorLeft > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorRight > blackWhiteValue))
             {
                 return;
             }
@@ -164,8 +160,8 @@ void loop()
         for (int i = 0; i < 1000; i++)
         {
             delay(1);
-            qtr.read(sensorValues);
-            if ((sensorLeft < blackWhiteValue) && (sensorBetweenLeft < blackWhiteValue) && (sensorMiddleLeft < blackWhiteValue) && (sensorMiddleRight < blackWhiteValue) && (sensorBetweenRight < blackWhiteValue) && (sensorRight < blackWhiteValue))
+            qtr.readCalibrated(sensorValues);
+            if ((sensorLeft > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorRight > blackWhiteValue))
             {
                 return;
             }
@@ -174,8 +170,8 @@ void loop()
         for (int i = 0; i < 1000; i++)
         {
             delay(1);
-            qtr.read(sensorValues);
-            if ((sensorLeft < blackWhiteValue) && (sensorBetweenLeft < blackWhiteValue) && (sensorMiddleLeft < blackWhiteValue) && (sensorMiddleRight < blackWhiteValue) && (sensorBetweenRight < blackWhiteValue) && (sensorRight < blackWhiteValue))
+            qtr.readCalibrated(sensorValues);
+            if ((sensorLeft > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorRight > blackWhiteValue))
             {
                 return;
             }
