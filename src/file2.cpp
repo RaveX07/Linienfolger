@@ -13,12 +13,12 @@
 #define IR_MID_RIGHT A4
 #define IR_RIGHT A3
 
-int iterration = 0;
-
 QTRSensors qtr;
 
 const uint8_t SensorCount = 4;
 uint16_t sensorValues[SensorCount];
+
+int position = qtr.readLineBlack(sensorValues);
 
 #define sensorLeft sensorValues[0]
 #define sensorMiddleLeft sensorValues[1]
@@ -89,7 +89,7 @@ void correct(int speed, bool direction)
     }
 }
 
-void turn(int speed, bool direction)
+void turn(int speed, bool direction, int time)
 {
     Serial.print("Turn to ");
     Serial.print(direction ? "left": "right");
@@ -100,15 +100,39 @@ void turn(int speed, bool direction)
     {
         analogWrite(LEFT_PMW_PIN_L, 0);
         analogWrite(LEFT_PWM_PIN_R, speed);
-        analogWrite(RIGHT_PWM_PIN_L, 0);
+        analogWrite(RIGHT_PWM_PIN_L, speed);
         analogWrite(RIGHT_PWM_PIN_R, 0);
+        for(int i = 0; i > time; i++)
+        {
+            delay(1);
+            if (isLine())
+            {
+                break;
+            }
+        }
     }
     else
     {
-        analogWrite(LEFT_PMW_PIN_L, 0);
+        analogWrite(LEFT_PMW_PIN_L, speed);
         analogWrite(LEFT_PWM_PIN_R, 0);
         analogWrite(RIGHT_PWM_PIN_L, 0);
         analogWrite(RIGHT_PWM_PIN_R, speed);
+        for(int i = 0; i > time; i++)
+        {
+            delay(1);
+            if (isLine())
+            {
+                break;
+            }
+        }
+    }
+}
+
+bool isLine(){
+    if (sensorLeft <= 0 && sensorMiddleLeft == 0 && sensorMiddleRight == 0 && sensorRight == 0){
+        return false;
+    }else {
+        return true;
     }
 }
 
@@ -120,6 +144,58 @@ bool noLine(){
     }
 }
 
+void searchLine(bool direction){
+    if(direction)
+    {
+        for(int i = 0; i > 350; i++)
+        {
+            delay(1);
+            if(isLine())
+            {
+                break;
+            }
+        }
+
+        turn(50, false, 750);
+        turn(50, true, 1500);
+        turn(50, false, 750);
+        driveForward(50);
+        for(int i = 0; i > 500; i++)
+        {
+            delay(1);
+            if(isLine())
+            {
+                break;
+            }
+        }
+    }
+    else
+    {
+        for(int i = 0; i > 350; i++)
+        {
+            delay(1);
+            if(isLine())
+            {
+                break;
+            }
+        }
+
+        turn(50, true, 750);
+        turn(50, false, 1500);
+        turn(50, true, 750);
+        driveForward(50);
+        for(int i = 0; i > 500; i++)
+        {
+            delay(1);
+            if(isLine())
+            {
+                break;
+            }
+        }
+    }
+
+}
+
 void loop()
 {
     qtr.readCalibrated(sensorValues);
@@ -129,56 +205,54 @@ void loop()
         Serial.print(" ");
     }
 
-    if(qtr.)
+    if(2000 > qtr.readLineBlack(sensorValues) > 1000 || isLine())
     {
         driveForward(75);
-        iterration = 0;
     }
-    else if (sensorLeft > blackWhiteValue)
+    else if (2500 > qtr.readLineBlack(sensorValues) > 2000 || isLine())
     {
-        correct(40, false);
-        iterration = 0;
+        correct(50, false);
     }
-    else if (sensorRight > blackWhiteValue)
+    else if (1000 > qtr.readLineBlack(sensorValues) > 500 || isLine())
     {
-        correct(40, true);
-        iterration = 0;
+        correct(50, true);
+    }
+    else if (3000 > qtr.readLineBlack(sensorValues) > 2500 || isLine())
+    {
+        correct(30, false);
+    }
+    else if (500 > qtr.readLineBlack(sensorValues) > 0 || isLine())
+    {
+        correct(30, true);
     }
     else
     {
-        if(iterration == 0){
-            turn(50, false);
-            for (int i = 0; i < 1000; i++)
-            {
-                delay(1);
-                qtr.readCalibrated(sensorValues);
-                if ((sensorLeft > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorRight > blackWhiteValue))
-                {
-                    return;
-                }
-            }
-        }
-        
-        turn(50, true);
-        for (int i = 0; i < 2000; i++)
+        position = qtr.readLineBlack(sensorValues);
+        else if(2000 >= position >= 1000 || noLine())
         {
-            delay(1);
-            qtr.readCalibrated(sensorValues);
-            if ((sensorLeft > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorRight > blackWhiteValue))
-            {
-                return;
-            }
+            searchLine(true);
         }
-        turn(50, false);
-        for (int i = 0; i < 2000; i++)
+        else if(2500 > position > 2000 || noLine())
         {
-            delay(1);
-            qtr.readCalibrated(sensorValues);
-            if ((sensorLeft > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorRight > blackWhiteValue))
-            {
-                return;
-            }
+            correct(40, true);
+            searchLine(true);
         }
-        iterration = 1;
+        else if(1000 > position > 500 || noLine())
+        {
+            correct(40, false);
+            searchLine(false);
+
+
+        }
+        else if(3000 > position > 2500 || noLine())
+        {
+            correct(40, true);
+            searchLine(true);
+        }
+        else if(500 > position > 0 || noLine())
+        {
+            correct(40, false);
+            searchLine(false);
+        }
     }
 }
