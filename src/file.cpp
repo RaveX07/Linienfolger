@@ -5,16 +5,24 @@
 #define LEFT_PWM_PIN_R 10
 #define LEFT_PMW_PIN_L 11
 #define RIGHT_EN_PIN 8
+<<<<<<< HEAD
 #define RIGHT_PWM_PIN_L 5
 #define RIGHT_PWM_PIN_R 6
+=======
+#define RIGHT_PWM_PIN_L 6
+#define RIGHT_PWM_PIN_R 5
+>>>>>>> 3b9b3af65b3d8e38b389c8d0d425c015bd362b36
 
 #define IR_LEFT A0
 #define IR_MID_LEFT A5
 #define IR_MID_RIGHT A4
 #define IR_RIGHT A3
 
+<<<<<<< HEAD
 int iterration = 0;
 
+=======
+>>>>>>> 3b9b3af65b3d8e38b389c8d0d425c015bd362b36
 QTRSensors qtr;
 
 const uint8_t SensorCount = 4;
@@ -61,8 +69,13 @@ void driveForward(int speed)
 {
     Serial.print("Drive forward with speed ");
     Serial.println(speed);
+<<<<<<< HEAD
     analogWrite(LEFT_PWM_PIN_R, speed);
     analogWrite(LEFT_PMW_PIN_L, 0);
+=======
+    analogWrite(LEFT_PWM_PIN_R, 0);
+    analogWrite(LEFT_PMW_PIN_L, speed);
+>>>>>>> 3b9b3af65b3d8e38b389c8d0d425c015bd362b36
     analogWrite(RIGHT_PWM_PIN_R, speed);
     analogWrite(RIGHT_PWM_PIN_L, 0);
 }
@@ -76,7 +89,11 @@ void correct(int speed, bool direction)
     if (direction)
     {
         analogWrite(LEFT_PMW_PIN_L, 0);
+<<<<<<< HEAD
         analogWrite(LEFT_PWM_PIN_R, 75);
+=======
+        analogWrite(LEFT_PWM_PIN_R, 100);
+>>>>>>> 3b9b3af65b3d8e38b389c8d0d425c015bd362b36
         analogWrite(RIGHT_PWM_PIN_L, 0);
         analogWrite(RIGHT_PWM_PIN_R, speed);
     }
@@ -85,7 +102,11 @@ void correct(int speed, bool direction)
         analogWrite(LEFT_PMW_PIN_L, 0);
         analogWrite(LEFT_PWM_PIN_R, speed);
         analogWrite(RIGHT_PWM_PIN_L, 0);
+<<<<<<< HEAD
         analogWrite(RIGHT_PWM_PIN_R, 75);
+=======
+        analogWrite(RIGHT_PWM_PIN_R, 100);
+>>>>>>> 3b9b3af65b3d8e38b389c8d0d425c015bd362b36
     }
 }
 
@@ -121,6 +142,7 @@ void loop()
         Serial.print(sensor);
         Serial.print(" ");
     }
+<<<<<<< HEAD
 
     if ((sensorMiddleLeft > blackWhiteValue && sensorMiddleRight > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue))
     {
@@ -152,6 +174,35 @@ void loop()
             }
         }
         
+=======
+    Serial.println("");
+    return;
+
+    if ((sensorMiddleLeft > blackWhiteValue && sensorMiddleRight > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue))
+    {
+        driveForward(100);
+    }
+    else if (sensorLeft > blackWhiteValue)
+    {
+        correct(75, false);
+    }
+    else if (sensorRight > blackWhiteValue)
+    {
+        correct(65, true);
+    }
+    else
+    {
+        turn(50, false);
+        for (int i = 0; i < 1000; i++)
+        {
+            delay(1);
+            qtr.readCalibrated(sensorValues);
+            if ((sensorLeft > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorRight > blackWhiteValue))
+            {
+                return;
+            }
+        }
+>>>>>>> 3b9b3af65b3d8e38b389c8d0d425c015bd362b36
         turn(50, true);
         for (int i = 0; i < 2000; i++)
         {
@@ -163,7 +214,10 @@ void loop()
             }
         }
         turn(50, false);
+<<<<<<< HEAD
         for (int i = 0; i < 2000; i++)
+=======
+        for (int i = 0; i < 1000; i++)
         {
             delay(1);
             qtr.readCalibrated(sensorValues);
@@ -172,6 +226,20 @@ void loop()
                 return;
             }
         }
+        driveForward(50);
+        for (int i = 0; i < 1000; i++)
+>>>>>>> 3b9b3af65b3d8e38b389c8d0d425c015bd362b36
+        {
+            delay(1);
+            qtr.readCalibrated(sensorValues);
+            if ((sensorLeft > blackWhiteValue) || (sensorMiddleLeft > blackWhiteValue) || (sensorMiddleRight > blackWhiteValue) || (sensorRight > blackWhiteValue))
+            {
+                return;
+            }
+        }
+<<<<<<< HEAD
         iterration = 1;
+=======
+>>>>>>> 3b9b3af65b3d8e38b389c8d0d425c015bd362b36
     }
 }
